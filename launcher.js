@@ -15,7 +15,7 @@ var getQuery = function (key) { return new URLSearchParams(location.search).get(
     }
     function script(src) {
         return new Promise(function (resolve, reject) {
-            var tag = document.createElement('script'); tag.async = false; tag.src = src;
+            var tag = document.createElement('script'); tag.async = false; tag.src = src + '?release=20261030.1';
             tag.onload = function () { tag.remove(); resolve(); };
             tag.onerror = function () { tag.remove(); reject(new Error('Missing game script: ' + src)); };
             document.body.appendChild(tag);
