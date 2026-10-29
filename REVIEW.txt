@@ -1,0 +1,9 @@
+Review date: 2026-10-30
+
+Scope: static deployment, resource integrity, JavaScript/JSON syntax, representative gameplay, browser-local saves, languages, multi-tab behavior, and desktop performance observations.
+No full playthrough of every item, seasonal event, room or possible state is claimed. Mobile-device performance and prolonged multi-hour sessions were not exhaustively benchmarked.
+
+Language: original Simplified Chinese, explicitly retained at the owner's request.
+Fixes: server-only logging and save fallbacks removed; obsolete WebSocket test switch removed; startup failure reporting added; import format/size/version checks and previous-save backup added; .nojekyll added; multiple tabs restricted to a single save writer; ordered startup scripts download in parallel; verbose engine logging disabled.
+Checks: 4,309 version-manifest resources exist with exact filename case. All JavaScript and JSON parse. Browser naming, collection, reload, export and import tested. Opening a second tab visibly retires the first writer. Engine tests cover save/reload, export/import, quota failure, retired-tab writes, damaged-primary recovery, future-version protection, and unknown commands. 61 load commands completed without handler errors. A 120-tick Node sample had median 0.13 ms and p95 0.27 ms; this excludes browser rendering.
+Desktop browser sample: approximately 40 MiB transferred for startup/observed scene; no external host requests observed. JavaScript heap was in the tens of MiB. Browser scheduling changed with tab focus, so no game FPS guarantee is made.

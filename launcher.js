@@ -43,7 +43,8 @@ var getQuery = function (key) { return new URLSearchParams(location.search).get(
         window.appVersion = m.appVersion; window.appStatus = m.appStatus;
         window.frogCode = m.code; window.frogArgs = m.args;
         window.launchInfo = 'static_local';
-        for (var name of m.initial.concat(m.game)) await script(name);
+        // Classic scripts with async=false execute in insertion order while downloading in parallel.
+        await Promise.all(m.initial.concat(m.game).map(script));
         egret.runEgret({renderMode:'webgl',audioType:0,calculateCanvasScaleFactor:function (context) {
             var backing = context.backingStorePixelRatio || context.webkitBackingStorePixelRatio || context.mozBackingStorePixelRatio || context.msBackingStorePixelRatio || context.oBackingStorePixelRatio || 1;
             return (window.devicePixelRatio || 1) / backing;
